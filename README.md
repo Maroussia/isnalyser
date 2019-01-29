@@ -1,2 +1,2 @@
 # isnalyser
-Automatic Isnad tree visualisation
+Automatic isnād tree visualisation
