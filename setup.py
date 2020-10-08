@@ -6,8 +6,9 @@ setup(
 	description='Create Isnad graphs automatically.',
 	py_modules=["graph", "ranking"], # list of all the small modules -> what people import
 	package_dir={'':'isnalyser'}, # directory, where our source code is
+	packages=setuptools.find_packages(),
+	python_requires=">=3.5", # python version
 	install_requires= ["pandas>=0.24.2", "graphviz>=0.11.1"], # dependancies
-	packages=setuptools.find_packages(), 
 	url='',
 	author='',
 	author_email='',

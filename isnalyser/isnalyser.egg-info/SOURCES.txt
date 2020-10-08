@@ -1,8 +1,0 @@
-README.md
-setup.py
-isnalyser/graph.py
-isnalyser/ranking.py
-isnalyser/isnalyser.egg-info/PKG-INFO
-isnalyser/isnalyser.egg-info/SOURCES.txt
-isnalyser/isnalyser.egg-info/dependency_links.txt
-isnalyser/isnalyser.egg-info/top_level.txt
