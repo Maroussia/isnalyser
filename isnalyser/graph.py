@@ -2,14 +2,21 @@ r"""The <graph> module draws the final graph creating
 and connecting all the nodes together with edges 
 and aligning them to the timeline subgraph."""
 
+from collections import defaultdict
+import itertools
 import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
+
 from graphviz import Digraph
 from ranking import rank_list, same_rank_subgraph, a_timeline
+from colors import get_discrete_cmap
 
 
 def draw_graph(path_to_transmitters_file:str,
                path_to_transmissions_file:str,
-               timeline_step:int, color_origin=dict()) -> Digraph:
+               timeline_step:int, color_origin='auto') -> Digraph:
     """
     draws the final graph by
     (1) creating a dataframe with nodes (transmitters) using the
@@ -43,13 +50,29 @@ def draw_graph(path_to_transmitters_file:str,
                 ranksep='1.2', concentrate='false'),
                 node_attr=dict(shape='none'))
     
-    # TODO more colors
-    color_origin = 'black'
-    df_nodes['Color'] = color_origin
+
+    # color nodes according to origin
+    num_origins = df_nodes.Origin.nunique(dropna=False)
+    if color_origin=='auto':
+        cmap = get_discrete_cmap(num_origins, base_cmap='nipy_spectral')
+        colors = (mpl.colors.to_hex(cmap(i)) for i in range(num_origins))
+        color_cycle = itertools.cycle(colors)
+        # Matching colors to origins
+        color_origin = dict()
+        for i, origin in enumerate(df_nodes.Origin.unique()):
+            color_origin[origin] = next(color_cycle)
+    else:
+        # every origin black except those in the color_origin parameter
+        color_origin = defaultdict(lambda: 'black', color_origin)
+
+    df_nodes['Color'] = df_nodes.Origin.map(color_origin)
         
     # Creating the nodes
     for _, row in df_nodes.iterrows():
         g.node(name=row.Transmitters, fontcolor=row.Color)
+
+   
+
 
     # Defining the timeline subgraph attributes
     minimum = df_nodes.Ranking.min()
@@ -59,7 +82,7 @@ def draw_graph(path_to_transmitters_file:str,
     n_attr = {'name':'j', 'shape':'none'}
 
     #Dictionary of edges' attributes
-    e_attr = {'arrowhead':'none', 'color':'black', 'penwidth':'10', 'len':'1.0'}
+    e_attr = {'arrowhead':'none', 'color':'black', 'penwidth':'2', 'len':'1.0'}
 
     # Creating the timeline as a subgraph
     a_timeline(g, minimum*timeline_step, maximum*timeline_step, timeline_step, n_attr, e_attr)
@@ -78,7 +101,7 @@ def draw_graph(path_to_transmitters_file:str,
 
 def view_graph(path_to_transmitters_file:str,
                path_to_transmissions_file:str,
-               timeline_step:int, color_origin=dict(), graph_format='pdf', use_example=False) -> None:
+               timeline_step:int, color_origin='auto', graph_format='pdf', use_example=False) -> None:
     """Displays the final graph (isnad tree) in the given format;
        The following parameters must be provided:
        - a path to the csv file containing the transmitters

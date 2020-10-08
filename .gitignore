@@ -1,3 +1,7 @@
+isnalyser/example_data/Transmitters-Umar.csv
+isnalyser/example_data/Transmitters-Ali.csv
+isnalyser/example_data/Transmission-Umar.csv
+isnalyser/example_data/Transmission-Ali.csv
 *.gv
 *.gv.pdf
 isnalyser/debug.py
