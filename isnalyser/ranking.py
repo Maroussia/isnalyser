@@ -3,8 +3,11 @@ r"""This module contains 3 functions
    <same_rank_subgraph> matches the nodes of the subgraph, i.e the dates, with the corresponding node of the main graph, i.e. the transmitters
    <a_timeline> creates the a subgraph with the dates
 """
+import pandas as pd
+from graphviz import Digraph
 
-def rank_list(date, rank, df):
+
+def rank_list(date:str, rank:int, df:pd.DataFrame.astype) -> list:
     """
     Return a list with the date and all the node 
     ids that should be placed at the same rank.
@@ -18,7 +21,7 @@ def rank_list(date, rank, df):
     return l
 
 
-def same_rank_subgraph(G, rank_lst):
+def same_rank_subgraph(G:Digraph, rank_lst:list) -> None:
     """ Return subgraph of nodes from same-rank ids. """
     with G.subgraph() as s:
         s.attr(rank='same')
@@ -27,7 +30,7 @@ def same_rank_subgraph(G, rank_lst):
                 s.node(node_id)
 
 
-def a_timeline(G, minimum, maximum, step, n_attr, e_attr):
+def a_timeline(G:Digraph, minimum:int, maximum:int, step:int, n_attr:dict, e_attr:dict) -> None:
     """
     creates a timeline in the form of a subgraph
     G = the original graph

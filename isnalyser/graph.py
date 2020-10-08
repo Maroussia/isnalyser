@@ -7,10 +7,9 @@ from graphviz import Digraph
 from ranking import rank_list, same_rank_subgraph, a_timeline
 
 
-
-def draw_graph(path_to_transmitters_file,
-               path_to_transmissions_file,
-               timeline_step, color_origin=dict()):
+def draw_graph(path_to_transmitters_file:str,
+               path_to_transmissions_file:str,
+               timeline_step:int, color_origin=dict()) -> Digraph:
     """
     draws the final graph by
     (1) creating a dataframe with nodes (transmitters) using the
@@ -77,9 +76,9 @@ def draw_graph(path_to_transmitters_file,
     return g
 
 
-def view_graph(path_to_transmitters_file,
-               path_to_transmissions_file,
-               timeline_step, color_origin=dict(), graph_format='pdf', use_example=False):
+def view_graph(path_to_transmitters_file:str,
+               path_to_transmissions_file:str,
+               timeline_step:int, color_origin=dict(), graph_format='pdf', use_example=False) -> None:
     """Displays the final graph (isnad tree) in the given format;
        The following parameters must be provided:
        - a path to the csv file containing the transmitters
