@@ -8,7 +8,7 @@ setup(
 	package_dir={'':'isnalyser'}, # directory, where our source code is
 	packages=setuptools.find_packages(),
 	python_requires=">=3.5", # python version
-	install_requires= ["pandas>=0.24.2", "graphviz>=0.11.1"], # dependancies
+	install_requires= ["pandas>=0.24.2", "graphviz>=0.11.1", "matplotlib>=2.0.0", "numpy>=1.12.0"], # dependancies
 	url='',
 	author='',
 	author_email='',
