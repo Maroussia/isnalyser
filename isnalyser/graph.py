@@ -12,6 +12,7 @@ import matplotlib as mpl
 from graphviz import Digraph
 from ranking import rank_list, same_rank_subgraph, a_timeline
 from colors import get_discrete_cmap
+from paths import path_all, merge_edges
 
 
 def draw_graph(path_to_transmitters_file:str,
@@ -38,7 +39,9 @@ def draw_graph(path_to_transmitters_file:str,
 
     # init dataframes from files
     df_nodes = pd.read_csv(path_to_transmitters_file)
+    # load data from file and process
     df_edges = pd.read_csv(path_to_transmissions_file)
+    df_edges = merge_edges(df_edges)
     # create ranking ids
     df_nodes['Ranking'] = df_nodes.dAH // timeline_step
 
