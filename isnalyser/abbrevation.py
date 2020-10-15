@@ -8,7 +8,7 @@
 
 """
 
-def abbrevate():
+def abbreviate():
 	"""
 	"""
 	raise NotImplementedError
