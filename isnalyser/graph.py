@@ -12,6 +12,7 @@ import matplotlib as mpl
 from graphviz import Digraph
 from ranking import rank_list, same_rank_subgraph, a_timeline
 from colors import get_discrete_cmap
+from paths import path_all, merge_edges
 
 
 def draw_graph(path_to_transmitters_file:str,
@@ -38,7 +39,9 @@ def draw_graph(path_to_transmitters_file:str,
 
     # init dataframes from files
     df_nodes = pd.read_csv(path_to_transmitters_file)
+    # load data from file and process
     df_edges = pd.read_csv(path_to_transmissions_file)
+    df_edges = merge_edges(df_edges)
     # create ranking ids
     df_nodes['Ranking'] = df_nodes.dAH // timeline_step
 
@@ -66,7 +69,8 @@ def draw_graph(path_to_transmitters_file:str,
         color_origin = defaultdict(lambda: 'black', color_origin)
 
     df_nodes['Color'] = df_nodes.Origin.map(color_origin)
-        
+    
+
     # Creating the nodes
     for _, row in df_nodes.iterrows():
         g.node(name=row.Transmitters, fontcolor=row.Color)
@@ -95,6 +99,24 @@ def draw_graph(path_to_transmitters_file:str,
     # Creating the edges (transmission paths)
     for _, row in df_edges.iterrows():
         g.edge(row.From, row.To, arrowhead='vee')
+
+    # add a legend
+    mid_legend_node = int(num_origins/2) # set midpoint... this will be connected to main graphs top node
+    legend_nodes = []
+    with g.subgraph() as l: # init legend as new subgraph
+        l.attr(rankdir='LR')
+        for i, o in enumerate(df_nodes.Origin.unique()): # add nodes
+            if o in color_origin.keys() and type(o)==str:
+                l.node(name=o, shape='ellipse', color=color_origin[o])
+                l.attr(rank='min')
+                legend_nodes.append(o)
+                if i==mid_legend_node: # if legend node is midpoint, place it over the main graphs top node
+                    g.edge(o, df_nodes.loc[df_nodes.dAH == df_nodes.dAH.min()].Transmitters.values[0], color='white')
+        
+        # add (invisible) connections so that they are ordered and actually midpoint is above top node
+        for j in range(1, len(legend_nodes)):
+            l.edge(legend_nodes[j-1], legend_nodes[j], color='white')
+
 
     return g
 
