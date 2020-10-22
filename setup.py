@@ -14,7 +14,7 @@ setup(
 	python_requires=">=3.5", # python version
 	install_requires= ["pandas>=0.24.2", "graphviz>=0.11.1", "matplotlib>=2.0.0", "numpy>=1.12.0"], # dependancies
 	url='https://github.com/dhakara/isnalyser',
-	author='Maroussia Bednarkiewicz, Stefan Wezel',
+	author='Maroussia Bednarkiewicz, Stefan Wezel, Álvaro Tejero Cantero',
 	author_email='maroussia.b@gmail.com',
 	include_package_data=True,
 	)
