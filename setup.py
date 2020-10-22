@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 setup(
 	name='isnalyser', # this is the pip name -> what people pip install
 	version='0.0.1', # version of our library
-	description='Create Isnad graphs automatically.',
+	description='Create isnad graphs automatically.',
 	long_description=long_description,
 	py_modules=["graph", "ranking"], # list of all the small modules -> what people import
 	package_dir={'':'isnalyser'}, # directory, where our source code is
