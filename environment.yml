@@ -1,0 +1,9 @@
+name: isnaconda
+channels:
+- defaults
+dependencies:
+- python=3.7.3
+- matplotlib=3.0.3
+- pandas=1.0.1
+- python-graphviz=0.14.1
+- numpy=1.16.2
