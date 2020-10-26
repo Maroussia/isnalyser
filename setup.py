@@ -9,6 +9,7 @@ setup(
 	version='0.0.1', # version of our library
 	description='Create isnad graphs automatically.',
 	long_description=long_description,
+	long_description_content_type="text/markdown",
 	packages=setuptools.find_packages(),
 	python_requires=">=3.5", # python version
 	install_requires= ["pandas>=0.24.2", "graphviz>=0.11.1", "matplotlib>=2.0.0", "numpy>=1.12.0"], # dependencies and their versions
@@ -17,3 +18,4 @@ setup(
 	author_email='maroussia.b@gmail.com',
 	include_package_data=True,
 	)
+	
