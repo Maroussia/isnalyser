@@ -10,6 +10,8 @@ import matplotlib as mpl
 import numpy as np
 from graphviz import Digraph
 
+from pkg_resources import resource_filename
+
 from isnalyser.ranking import rank_list, same_rank_subgraph, a_timeline
 from isnalyser.colors import get_discrete_cmap
 from isnalyser.paths import path_all, merge_edges
@@ -134,8 +136,8 @@ def view_graph(path_to_transmitters_file:str,
          the origins, or 'auto' for automatic color assignment
     """
     if use_example: # render example graph
-        path_to_transmitters_file = 'isnalyser/example_data/transmitters_example.csv'
-        path_to_transmissions_file = 'isnalyser/example_data/transmissions_example.csv'
+        path_to_transmitters_file = resource_filename(__name__, 'example_data/transmitters_example.csv')
+        path_to_transmissions_file = resource_filename(__name__, 'example_data/transmissions_example.csv')
 
     g = draw_graph(path_to_transmitters_file,
         path_to_transmissions_file,

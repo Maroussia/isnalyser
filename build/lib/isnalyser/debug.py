@@ -31,4 +31,4 @@ timeline_step = 15 # works for small example
 graph_format = 'pdf'
 
 # draw_graph(path_to_file_transmitters, path_to_file_transmissions, timeline_step, color_origin)
-view_graph(path_to_file_transmitters, path_to_file_transmissions, timeline_step, color_origin="auto", use_example=False	)
+view_graph(path_to_file_transmitters, path_to_file_transmissions, timeline_step, color_origin="auto", use_example=True	)

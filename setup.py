@@ -5,8 +5,8 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
-	name='isnalyser', # what people pip install
-	version='0.0.1', # version of our library
+	name='isnalyser_stefan', # what people pip install
+	version='0.0.3', # version of our library
 	description='Create isnad graphs automatically.',
 	long_description=long_description,
 	long_description_content_type="text/markdown",
@@ -17,5 +17,7 @@ setup(
 	author='Maroussia Bednarkiewicz, Stefan Wezel, Álvaro Tejero Cantero',
 	author_email='maroussia.b@gmail.com',
 	include_package_data=True,
+	package_data = {
+	'' : ['*.csv']}
 	)
 	
