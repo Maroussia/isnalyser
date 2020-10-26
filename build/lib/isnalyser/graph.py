@@ -138,8 +138,6 @@ def view_graph(path_to_transmitters_file:str,
     if use_example: # render example graph
         path_to_transmitters_file = resource_filename(__name__, 'example_data/transmitters_example.csv')
         path_to_transmissions_file = resource_filename(__name__, 'example_data/transmissions_example.csv')
-        # path_to_transmitters_file = 'isnalyser/example_data/transmitters_example.csv'
-        # path_to_transmissions_file = 'isnalyser/example_data/transmissions_example.csv'
 
     g = draw_graph(path_to_transmitters_file,
         path_to_transmissions_file,
