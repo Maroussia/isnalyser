@@ -7,9 +7,9 @@ import itertools
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-
-
+import numpy as np
 from graphviz import Digraph
+
 from isnalyser.ranking import rank_list, same_rank_subgraph, a_timeline
 from isnalyser.colors import get_discrete_cmap
 from isnalyser.paths import path_all, merge_edges
