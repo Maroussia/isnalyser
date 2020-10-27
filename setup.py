@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
-	name='isnalyser_stefan', # what people pip install
+	name='isnalyser', # what people pip install
 	version='0.1.0', # version of our library
 	description='Create isnad graphs automatically.',
 	long_description=long_description,
