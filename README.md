@@ -7,7 +7,7 @@ license](https://img.shields.io/badge/license-GNU-orange)](https://github.com/Ma
 
 # Automated isnād tree visualisations
 
-For scholars studying Ḥadīth texts, drawing an __isnād__ tree with more than 40 transmitters is a tidious work and finding the right medium to desplay it fully can even prove to be impossible. The `isnalyser` is a simple program for the automation of __isnād__ trees drawing and their customable display in handy formats.
+For scholars studying Ḥadīth texts, drawing an __isnād__ tree with more than 40 transmitters is a tedious work and finding the right medium to desplay it fully can even prove to be impossible. The `isnalyser` is a simple program for the automation of __isnād__ trees drawing and their customisable display in handy formats.
 
 
   <img src="https://user-images.githubusercontent.com/12030245/95599970-13c1dc00-0a52-11eb-96e9-f9969fdd572f.png" width="350">
