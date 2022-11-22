@@ -1,7 +1,7 @@
 r"""This module contains 3 functions
    <rank_list> attributes to each node a rank according to its death date
    <same_rank_subgraph> matches the nodes of the subgraph, i.e the dates, with the corresponding node of the main graph, i.e. the transmitters
-   <a_timeline> creates the a subgraph with the dates
+   <a_timeline> creates a subgraph with the dates.
 """
 import pandas as pd
 from graphviz import Digraph
@@ -32,7 +32,7 @@ def same_rank_subgraph(G:Digraph, rank_lst:list) -> None:
 
 def a_timeline(G:Digraph, minimum:int, maximum:int, step:int, n_attr:dict, e_attr:dict) -> None:
     """
-    creates a timeline in the form of a subgraph
+    Create a timeline in the form of a subgraph
     G = the original graph
     s = G's subgraph
     minimum = start of the timeline
