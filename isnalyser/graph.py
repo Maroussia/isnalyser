@@ -1,6 +1,8 @@
-r"""The <graph> module draws the final graph creating 
+r"""
+The <graph> module draws the final graph creating 
 and connecting all the nodes together with edges 
-and aligning them to the timeline subgraph."""
+and aligning them to the timeline subgraph.
+"""
 
 from collections import defaultdict
 import itertools
