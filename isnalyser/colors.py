@@ -16,5 +16,5 @@ def get_discrete_cmap(N, base_cmap=None):
 
 
 def color_to_origin(df_nodes):
-    """Assigns colors to origins."""
+    """Assign colors to origins."""
     raise NotImplementedError
