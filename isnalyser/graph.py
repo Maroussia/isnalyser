@@ -21,13 +21,15 @@ from isnalyser.paths import path_all, merge_edges
 
 def draw_graph(path_to_transmitters_file:str,
                path_to_transmissions_file:str,
-               timeline_step:int, color_origin='auto') -> Digraph:
+               timeline_step:int, 
+               color_origin='auto',
+               edge_label=True) -> Digraph:
     """
     Draw the final graph by
     (1) creating a dataframe with nodes (transmitters) using the
     database_to_dataframe function;
     (2) creating the edges (transmission path) using the
-    database_to_dataframe function;
+    database_to_dataframe function, adding labels from the Variant column;
     (3) ranking the nodes to match them with the timeline subgraph;
     (4) creating the graph as <g>;
     (5) creating the nodes within <g>;
@@ -87,9 +89,6 @@ def draw_graph(path_to_transmitters_file:str,
     for _, row in df_nodes.iterrows():
         g.node(name=row.Transmitters, fontcolor=row.Color)
 
-   
-
-
     # Define the timeline subgraph attributes
     minimum = df_nodes.Ranking.min()
     maximum = df_nodes.Ranking.max()
@@ -110,7 +109,11 @@ def draw_graph(path_to_transmitters_file:str,
 
     # Create the edges (transmission paths)
     for _, row in df_edges.iterrows():
-        g.edge(row.From, row.To, arrowhead='vee')
+        if edge_label:
+            attributes = {'xlabel':row.paths, 'arrowhead':'vee', 'fontcolor':'#6C5353', 'fontsize':'11.0', 'fontname':'Calibri'}
+            g.edge(row.From, row.To, **attributes)
+        else:
+            g.edge(row.From, row.To, arrowhead='vee')
 
     # Add a legend
     mid_legend_node = int(num_origins/2) # Set midpoint... this will be connected to main graphs top node
@@ -135,7 +138,11 @@ def draw_graph(path_to_transmitters_file:str,
 
 def view_graph(path_to_transmitters_file:str,
                path_to_transmissions_file:str,
-               timeline_step:int, color_origin='auto', graph_format='pdf', use_example=False) -> None:
+               timeline_step:int, 
+               color_origin='auto', 
+               graph_format='pdf', 
+               use_example=False,
+               edge_label=True) -> None:
     """Display the final graph (isnad tree) in the given format;
        The following parameters must be provided:
        - a path to the csv file containing the transmitters
@@ -152,7 +159,8 @@ def view_graph(path_to_transmitters_file:str,
     g = draw_graph(path_to_transmitters_file,
         path_to_transmissions_file,
         timeline_step,
-        color_origin=color_origin)
+        color_origin=color_origin,
+        edge_label=edge_label)
     
     g.format=graph_format
 
