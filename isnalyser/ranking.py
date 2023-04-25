@@ -12,7 +12,7 @@ def rank_list(date:str, rank:int, df:pd.DataFrame.astype) -> list:
     Return a list with the date and all the node 
     ids that should be placed at the same rank.
     """
-    same_rank = df[df.Ranking==rank].Transmitters.values
+    same_rank = df[df.Ranking==rank].Transmitter.values
     l = [date]
     if len(same_rank) == 0:
         same_rank = ['placeholder']
