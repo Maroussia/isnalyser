@@ -42,9 +42,17 @@ def draw_graph(path_to_transmitters_file:str,
            path_to_transmitters_file.endswith('.csv'), "Please provide .csv input files."
 
     # Initiate the dataframes from input files
-    df_nodes = pd.read_csv(path_to_transmitters_file)
+    df_nodes = pd.read_csv(path_to_transmitters_file, 
+                           header=0, 
+                           names=['Transmitter','dAH','Origin'], # the column names cannot be changed
+                           index_col=False, 
+                           skipinitialspace=True) # prevent extra white space around the separator
     # Load data from file and process
-    df_edges = pd.read_csv(path_to_transmissions_file)
+    df_edges = pd.read_csv(path_to_transmissions_file, 
+                           header=0, 
+                           names=['From','To','Variant'], # the column names cannot be changed
+                           index_col=False, 
+                           skipinitialspace=True) # prevent extra white space around the separator
     df_edges = merge_edges(df_edges)
     # Create ranking ids
     df_nodes['Ranking'] = df_nodes.dAH // timeline_step
