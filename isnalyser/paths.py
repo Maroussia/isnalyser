@@ -2,7 +2,7 @@ import pandas as pd
 
 def path_all(df:pd.DataFrame.astype) -> None:
     """ Append FileName (i.e. name of text) column's values on new line. """
-    return '\n'.join(df.FileName)
+    return '\n'.join(df.Variant)
 
 
 def merge_edges(df:pd.DataFrame.astype) -> pd.DataFrame.astype:
@@ -16,4 +16,5 @@ def merge_edges(df:pd.DataFrame.astype) -> pd.DataFrame.astype:
                             on=['From', 'To']).rename(columns={0:'paths'})
         return df_paths[~df_paths.duplicated(['From', 'To'])]
     except AttributeError:
+        print("Could not merge paths")
         return df
