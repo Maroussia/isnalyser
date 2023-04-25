@@ -87,7 +87,7 @@ def draw_graph(path_to_transmitters_file:str,
 
     # Create the nodes
     for _, row in df_nodes.iterrows():
-        g.node(name=row.Transmitters, fontcolor=row.Color)
+        g.node(name=row.Transmitter, fontcolor=row.Color)
 
     # Define the timeline subgraph attributes
     minimum = df_nodes.Ranking.min()
@@ -126,7 +126,7 @@ def draw_graph(path_to_transmitters_file:str,
                 l.attr(rank='min')
                 legend_nodes.append(o)
                 if i==mid_legend_node: # if legend node is midpoint, place it over the main graphs top node
-                    g.edge(o, df_nodes.loc[df_nodes.dAH == df_nodes.dAH.min()].Transmitters.values[0], color='white')
+                    g.edge(o, df_nodes.loc[df_nodes.dAH == df_nodes.dAH.min()].Transmitter.values[0], color='white')
         
         # Add (invisible) connections so that they are ordered and actually midpoint is above top node
         for j in range(1, len(legend_nodes)):
