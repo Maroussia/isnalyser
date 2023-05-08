@@ -151,6 +151,7 @@ def view_graph(path_to_transmitters_file:str,
        - the export format: default 'pdf'; others: 'svg', 'png'
        - (optional) a dictionary specifying colors for some or all of
          the origins, or 'auto' for automatic color assignment
+       - (optional) edge_label=False to remove the labels on edges.
     """
     if use_example: # Render example graph
         path_to_transmitters_file = resource_filename(__name__, 'example_data/transmitters_example.csv')
