@@ -46,7 +46,7 @@ def draw_graph(path_to_transmitters_file:str,
     # Initiate the dataframes from input files
     df_nodes = pd.read_csv(path_to_transmitters_file, 
                            header=0, 
-                           names=['Transmitter','dAH','Origin'], # the column names cannot be changed
+                           names=['Transmitter','dAH','Origin'], # column names are used in the code
                            index_col=False, 
                            skipinitialspace=True) # prevent extra white space around the separator
     # Load data from file and process
@@ -63,7 +63,7 @@ def draw_graph(path_to_transmitters_file:str,
 
     # Create the main graph    
     g = Digraph('graph', filename='graph.gv',
-                graph_attr=dict(size='12,24', fontsize='16',
+                graph_attr=dict(size='8,11', fontsize='16',
                 ranksep='1.2', concentrate='false'),
                 node_attr=dict(shape='none'))
     
@@ -87,14 +87,14 @@ def draw_graph(path_to_transmitters_file:str,
 
     # Create the nodes
     for _, row in df_nodes.iterrows():
-        g.node(name=row.Transmitter, fontcolor=row.Color)
+        g.node(name=row.Transmitter, fontcolor=row.Color, fontsize='20', fontname='DejaVu Serif')
 
     # Define the timeline subgraph attributes
     minimum = df_nodes.Ranking.min()
     maximum = df_nodes.Ranking.max()
 
     # Create a dictionary of nodes' attributes
-    n_attr = {'name':'j', 'shape':'none'}
+    n_attr = {'name':'j', 'shape':'none', 'fontsize':'15.0', 'fontname':'Calibri'}
 
     # Create a dictionary of edges' attributes
     e_attr = {'arrowhead':'none', 'color':'black', 'penwidth':'2', 'len':'1.0'}
@@ -110,7 +110,7 @@ def draw_graph(path_to_transmitters_file:str,
     # Create the edges (transmission paths)
     for _, row in df_edges.iterrows():
         if edge_label:
-            attributes = {'xlabel':row.paths, 'arrowhead':'vee', 'fontcolor':'#6C5353', 'fontsize':'11.0', 'fontname':'Calibri'}
+            attributes = {'xlabel':row.paths, 'arrowhead':'vee', 'fontcolor':'#AC9393', 'fontsize':'16.0', 'fontname':'Calibri'}
             g.edge(row.From, row.To, **attributes)
         else:
             g.edge(row.From, row.To, arrowhead='vee')
@@ -122,7 +122,7 @@ def draw_graph(path_to_transmitters_file:str,
         l.attr(rankdir='LR')
         for i, o in enumerate(df_nodes.Origin.unique()): # add nodes
             if o in color_origin.keys() and type(o)==str:
-                l.node(name=o, shape='ellipse', color=color_origin[o])
+                l.node(name=o, shape='ellipse', color=color_origin[o], fontname='DejaVu Serif', fontsize='20.0')
                 l.attr(rank='min')
                 legend_nodes.append(o)
                 if i==mid_legend_node: # if legend node is midpoint, place it over the main graphs top node
@@ -140,7 +140,7 @@ def view_graph(path_to_transmitters_file:str,
                path_to_transmissions_file:str,
                timeline_step:int, 
                color_origin='auto', 
-               graph_format='pdf', 
+               graph_format='svg', 
                use_example=False,
                edge_label=True) -> None:
     """Display the final graph (isnad tree) in the given format;
@@ -148,7 +148,7 @@ def view_graph(path_to_transmitters_file:str,
        - a path to the csv file containing the transmitters
        - a path to the csv file containing the transmission
        - the time lapses in years that represent the timeline nodes (timeline_step)
-       - the export format: default 'pdf'; others: 'svg', 'png'
+       - the export format: default 'svg'; others: 'pdf', 'png'
        - (optional) a dictionary specifying colors for some or all of
          the origins, or 'auto' for automatic color assignment
        - (optional) edge_label=False to remove the labels on edges.
